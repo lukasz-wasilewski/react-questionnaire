@@ -22,6 +22,10 @@ injectGlobal`
     min-width: 100%;
   }
 
+  .list-element{
+    list-style: none;
+  }
+
   p,
   label {
     font-family: Georgia, Times, 'Times New Roman', serif;

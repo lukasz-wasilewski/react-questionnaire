@@ -22,12 +22,16 @@ export default function createRoutes(store) {
       name: 'home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/HomePage'),
+          import('containers/FormPage'),
+          import('containers/FormPage/reducer'),
+          import('containers/FormPage/sagas'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([component]) => {
+        importModules.then(([component, reducer, sagas]) => {
+          injectReducer('formPage', reducer.default);
+          injectSagas(sagas.default);
           renderRoute(component);
         });
 

@@ -1,0 +1,82 @@
+{
+  "name": "Formularz główny",
+  "questions": [
+    {
+      "id": 0,
+      "type": "checkbox",
+      "question": "What lib is for async flow?",
+      "answers": [
+        "Redux-saga",
+        "Redux-thunk",
+        "Redux"
+      ]
+    }, {
+      "id": 1,
+      "type": "text",
+      "question": "Describe your ideal stack",
+      "answers": []
+    }, {
+      "id": 2,
+      "type": "radio",
+      "question": "What technology will be on top in 1 year?",
+      "answers": [
+        "Angular 1",
+        "React"
+      ]
+    }, {
+      "id": 3,
+      "type": "select",
+      "question": "Choose you favorite color",
+      "answers": [
+        "Green",
+        "Blue",
+        "Red",
+        "Black"
+      ]
+    }, {
+      "id": 4,
+      "type": "multiselect",
+      "question": "Select location you would like to visit",
+      "answers": [
+        "Gdańsk",
+        "Wrocław",
+        "Warszawa",
+        "Kraków"
+      ]
+    }, {
+      "id": 5,
+      "type": "date",
+      "question": "What is your birth date?",
+      "answers": []
+    }, {
+      "id": 6,
+      "type": "number",
+      "question": "How old are you?",
+      "answers": []
+    }, {
+      "id": 7,
+      "type": "checkbox",
+      "question": "",
+      "answers": [
+        "",
+        ""
+      ]
+    }, {
+      "id": 8,
+      "type": "checkbox",
+      "question": "",
+      "answers": [
+        "",
+        ""
+      ]
+    }, {
+      "id": 9,
+      "type": "checkbox",
+      "question": "",
+      "answers": [
+        "",
+        ""
+      ]
+    }
+  ]
+}
