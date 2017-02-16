@@ -9,20 +9,19 @@ import React, { PropTypes } from 'react';
 export class CheckboxQuestion extends React.Component {
   constructor(props) {
     super(props);
-    this.result = [];
+    this.state = { result: [] };
     this.onCheckboxClick = this.onCheckboxClick.bind(this);
   }
 
   onCheckboxClick(value, checked) {
+    let result = [];
     if (checked) {
-      this.result.push(value);
+      result = this.state.result.concat([value]);
     } else {
-      const index = this.result.indexOf(value);
-      if (index > -1) {
-        this.result.splice(index, 1);
-      }
+      result = this.state.result.filter((r) => r !== value);
     }
-    this.props.onAnswerChange(this.props.id, this.result);
+    this.props.onAnswerChange(this.props.id, result);
+    this.setState({ result });
   }
 
   render() {
