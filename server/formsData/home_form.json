@@ -56,26 +56,27 @@
     }, {
       "id": 7,
       "type": "checkbox",
-      "question": "",
+      "question": "What fruits you like?",
       "answers": [
-        "",
-        ""
+        "Orange",
+        "Apple"
       ]
     }, {
       "id": 8,
       "type": "checkbox",
-      "question": "",
+      "question": "What frameworks you used?",
       "answers": [
-        "",
-        ""
+        "Angular",
+        "Vue"
       ]
     }, {
       "id": 9,
       "type": "checkbox",
-      "question": "",
+      "question": "What sports you prefer?",
       "answers": [
-        "",
-        ""
+        "Snowboard",
+        "Ski",
+        "Kite-surfing"
       ]
     }
   ]
