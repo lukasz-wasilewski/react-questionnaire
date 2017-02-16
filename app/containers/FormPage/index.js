@@ -11,7 +11,7 @@ import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { Button } from 'react-bootstrap';
 import _ from 'lodash';
 import makeSelectFormPage from './selectors';
-import { getForm, changeQuestionOrder, deleteQuestion, sendForm, errorQuestionHandler } from './actions';
+import { getForm, changeQuestionOrder, deleteQuestion, sendForm, errorQuestionHandler, answerQuestion } from './actions';
 import './style.scss';
 import QuestionComponent from '../../components/Question';
 
@@ -32,8 +32,6 @@ const SortableList = SortableContainer(({ items, onDelete, onAnswerChange }) => 
 export class FormPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor() {
     super();
-    this.answers = {};
-    this.onAnswerChange = this.onAnswerChange.bind(this);
     this.onFormSend = this.onFormSend.bind(this);
   }
 
@@ -41,14 +39,10 @@ export class FormPage extends React.Component { // eslint-disable-line react/pre
     this.props.getHomeForm();
   }
 
-  onAnswerChange(questionId, answer) {
-    this.answers[questionId] = { answer, questionId };
-  }
-
   onFormSend() {
     let valid = true;
     this.props.FormPage.form.questions.forEach((question) => {
-      if (!_.some(this.answers, (a) => a.questionId === question.id)) {
+      if (!_.some(this.props.FormPage.answers, (a) => a.questionId === question.id)) {
         valid = false;
         if (!question.error) {
           this.props.errorQuestionHandler(question.id, true);
@@ -58,7 +52,7 @@ export class FormPage extends React.Component { // eslint-disable-line react/pre
       }
     });
     if (valid) {
-      this.props.sendForm(this.answers, this.props.FormPage.form.name);
+      this.props.sendForm(this.props.FormPage.answers, this.props.FormPage.form.name);
     }
   }
 
@@ -70,7 +64,7 @@ export class FormPage extends React.Component { // eslint-disable-line react/pre
           onDelete={this.props.deleteQuestion}
           items={this.props.FormPage.form.questions}
           onSortEnd={this.props.onSortEnd}
-          onAnswerChange={this.onAnswerChange}
+          onAnswerChange={this.props.answerQuestion}
         />
         <Button onClick={this.onFormSend}>Send</Button>
       </div>
@@ -85,6 +79,7 @@ FormPage.propTypes = {
   onSortEnd: PropTypes.func.isRequired,
   sendForm: PropTypes.func.isRequired,
   errorQuestionHandler: PropTypes.func.isRequired,
+  answerQuestion: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -98,6 +93,7 @@ function mapDispatchToProps(dispatch) {
     deleteQuestion: (questionId) => dispatch(deleteQuestion(questionId)),
     sendForm: (form, name) => dispatch(sendForm(form, name)),
     errorQuestionHandler: (id, ifError) => dispatch(errorQuestionHandler(id, ifError)),
+    answerQuestion: (id, answer) => dispatch(answerQuestion(id, answer)),
   };
 }
 

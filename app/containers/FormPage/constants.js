@@ -10,3 +10,4 @@ export const CHANGE_FORM_ORDER = 'app/FormPage/CHANGE_FORM_ORDER';
 export const DELETE_QUESTION = 'app/FormPage/DELETE_QUESTION';
 export const SEND_FORM = 'app/FormPage/SEND_FORM';
 export const QUESTION_ERROR = 'app/FormPage/QUESTION_ERROR';
+export const ANSWER_QUESTION = 'app/FormPage/ANSWER_QUESTION';

@@ -12,6 +12,7 @@ import {
   CHANGE_FORM_ORDER,
   DELETE_QUESTION,
   QUESTION_ERROR,
+  ANSWER_QUESTION,
 } from './constants';
 
 const initialState = fromJS({
@@ -19,6 +20,7 @@ const initialState = fromJS({
     name: '',
     questions: [],
   },
+  answers: {},
 });
 
 function formPageReducer(state = initialState, action) {
@@ -39,6 +41,14 @@ function formPageReducer(state = initialState, action) {
       return state.set('form', {
         ...state.toJS().form,
         questions: _.map(state.toJS().form.questions, (q) => q.id === action.id ? { ...q, error: action.ifError } : q),
+      });
+    case ANSWER_QUESTION:
+      return state.set('answers', {
+        ...state.toJS().answers,
+        [action.id]: {
+          answer: action.answer,
+          questionId: action.id,
+        },
       });
     default:
       return state;

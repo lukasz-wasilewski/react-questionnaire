@@ -11,12 +11,21 @@ import {
   DELETE_QUESTION,
   SEND_FORM,
   QUESTION_ERROR,
+  ANSWER_QUESTION,
 } from './constants';
 
 export function getForm(formName) {
   return {
     type: GET_FORM,
     formName,
+  };
+}
+
+export function answerQuestion(id, answer) {
+  return {
+    type: ANSWER_QUESTION,
+    id,
+    answer,
   };
 }
 
