@@ -21,8 +21,7 @@ export class RadioQuestion extends React.Component {
   render() {
     const answers = this.props.answers.map((answer, index) => (
       <li className="list-element" key={index}>
-        <input type="radio" onChange={this.onChange} value={answer} checked={this.state.selected === answer} />
-        {answer}
+        <input type="radio" onChange={this.onChange} value={answer} checked={this.state.selected === answer} /> {answer}
       </li>
     ));
     return (

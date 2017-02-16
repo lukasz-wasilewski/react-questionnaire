@@ -14,7 +14,7 @@ export class CheckboxQuestion extends React.Component {
     this.onCheckboxClick = this.onCheckboxClick.bind(this);
     this.answers = props.answers.map((answer, index) => (
       <li className="list-element" key={index}>
-        <input type="checkbox" value={answer} onChange={(e) => this.onCheckboxClick(e.target.value, e.target.checked)} />{answer}
+        <input type="checkbox" value={answer} onChange={(e) => this.onCheckboxClick(e.target.value, e.target.checked)} /> {answer}
       </li>
     ));
     this.onAnswerChange = props.onAnswerChange;
