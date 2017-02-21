@@ -29,11 +29,9 @@ export function answerQuestion(id, answer) {
   };
 }
 
-export function errorQuestionHandler(id, ifError) {
+export function errorQuestionHandler() {
   return {
     type: QUESTION_ERROR,
-    id,
-    ifError,
   };
 }
 

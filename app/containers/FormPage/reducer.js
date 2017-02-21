@@ -19,7 +19,6 @@ const initialState = fromJS({
     name: '',
     questions: [],
   },
-  answers: {},
 });
 
 function formPageReducer(state = initialState, action) {
@@ -36,16 +35,12 @@ function formPageReducer(state = initialState, action) {
       );
     case QUESTION_ERROR:
       return state.updateIn(['form', 'questions'], (questions) =>
-        questions.map((q) => q.get('id') === action.id ? q.merge({ error: action.ifError }) : q),
+        questions.map((q) => q.get('user_answer') ?
+          q.merge({ error: false }) : q.merge({ error: true })),
       );
     case ANSWER_QUESTION:
-      return state.updateIn(['answers'], (answers) =>
-        answers.merge({
-          [action.id]: {
-            answer: action.answer,
-            questionId: action.id,
-          },
-        })
+      return state.updateIn(['form', 'questions'], (questions) =>
+        questions.map((q) => q.get('id') === action.id ? q.merge({ user_answer: action.answer }) : q),
       );
     default:
       return state;

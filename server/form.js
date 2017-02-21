@@ -7,10 +7,7 @@ app.get('/:id', (req, res) => {
 });
 
 app.post('/:id', (req, res) => {
-  const response = {
-    answers: req.body,
-    formName: req.params.id,
-  };
+  const response = req.body;
   console.log(response);
   res.json(response);
 });

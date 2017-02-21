@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import { Button } from 'react-bootstrap';
-import _ from 'lodash';
 import makeSelectFormPage from './selectors';
 import { getForm, changeQuestionOrder, deleteQuestion, sendForm, errorQuestionHandler, answerQuestion } from './actions';
 import './style.scss';
@@ -41,18 +40,14 @@ export class FormPage extends React.Component { // eslint-disable-line react/pre
 
   onFormSend() {
     let valid = true;
+    this.props.errorQuestionHandler();
     this.props.FormPage.form.questions.forEach((question) => {
-      if (!_.some(this.props.FormPage.answers, (a) => a.questionId === question.id)) {
+      if (!question.user_answer) {
         valid = false;
-        if (!question.error) {
-          this.props.errorQuestionHandler(question.id, true);
-        }
-      } else if (question.error) {
-        this.props.errorQuestionHandler(question.id, false);
       }
     });
     if (valid) {
-      this.props.sendForm(this.props.FormPage.answers, this.props.FormPage.form.name);
+      this.props.sendForm(this.props.FormPage.form, this.props.FormPage.form.name);
     }
   }
 
@@ -92,7 +87,7 @@ function mapDispatchToProps(dispatch) {
     onSortEnd: ({ oldIndex, newIndex }) => dispatch(changeQuestionOrder(oldIndex, newIndex)),
     deleteQuestion: (questionId) => dispatch(deleteQuestion(questionId)),
     sendForm: (form, name) => dispatch(sendForm(form, name)),
-    errorQuestionHandler: (id, ifError) => dispatch(errorQuestionHandler(id, ifError)),
+    errorQuestionHandler: () => dispatch(errorQuestionHandler()),
     answerQuestion: (id, answer) => dispatch(answerQuestion(id, answer)),
   };
 }
